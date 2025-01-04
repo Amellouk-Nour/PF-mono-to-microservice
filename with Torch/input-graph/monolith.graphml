@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="edge" attr.name="relation" attr.type="string" />
+  <key id="d1" for="node" attr.name="file" attr.type="string" />
+  <key id="d0" for="node" attr.name="type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="ProjetSiApplication">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\ProjetSiApplication.java</data>
+    </node>
+    <node id="SpringApplication" />
+    <node id="CorsConfig">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\configuration\CorsConfig.java</data>
+    </node>
+    <node id="registry" />
+    <node id="AcquerirController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\AcquerirController.java</data>
+    </node>
+    <node id="acquerirService" />
+    <node id="CandidatController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\CandidatController.java</data>
+    </node>
+    <node id="candidatService" />
+    <node id="storageService" />
+    <node id="candidats" />
+    <node id="candidat" />
+    <node id="Collectors" />
+    <node id="dossier" />
+    <node id="ResponseEntity" />
+    <node id="e" />
+    <node id="CompetenceController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\CompetenceController.java</data>
+    </node>
+    <node id="competenceService" />
+    <node id="DateStageController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\DateStageController.java</data>
+    </node>
+    <node id="dateStageService" />
+    <node id="EntrepriseController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\EntrepriseController.java</data>
+    </node>
+    <node id="entrepriseService" />
+    <node id="EtudiantController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\EtudiantController.java</data>
+    </node>
+    <node id="etudiantService" />
+    <node id="ProfController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\ProfController.java</data>
+    </node>
+    <node id="profService" />
+    <node id="PromoController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\PromoController.java</data>
+    </node>
+    <node id="promoService" />
+    <node id="StageController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\StageController.java</data>
+    </node>
+    <node id="stageService" />
+    <node id="TuteurController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\TuteurController.java</data>
+    </node>
+    <node id="tuteurService" />
+    <node id="TypeStageController">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\TypeStageController.java</data>
+    </node>
+    <node id="typeStageService" />
+    <node id="Access">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Access.java</data>
+    </node>
+    <node id="Acquerir">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Acquerir.java</data>
+    </node>
+    <node id="Annee">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Annee.java</data>
+    </node>
+    <node id="Candidat">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Candidat.java</data>
+    </node>
+    <node id="Competence">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Competence.java</data>
+    </node>
+    <node id="DateStage">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\DateStage.java</data>
+    </node>
+    <node id="Entreprise">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Entreprise.java</data>
+    </node>
+    <node id="Etudiant">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Etudiant.java</data>
+    </node>
+    <node id="FileData">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\FileData.java</data>
+    </node>
+    <node id="Professeur">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Professeur.java</data>
+    </node>
+    <node id="Promo">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Promo.java</data>
+    </node>
+    <node id="Role">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Role.java</data>
+    </node>
+    <node id="Stage">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Stage.java</data>
+    </node>
+    <node id="Tuteur">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Tuteur.java</data>
+    </node>
+    <node id="TypeStage">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\TypeStage.java</data>
+    </node>
+    <node id="Utilisateur">
+      <data key="d0">Entity</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Utilisateur.java</data>
+    </node>
+    <node id="StorageService">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\StorageService.java</data>
+    </node>
+    <node id="fileDataDao" />
+    <node id="StringUtils" />
+    <node id="file" />
+    <node id="fileName" />
+    <node id="existingFileDataOptional" />
+    <node id="existingFileData" />
+    <node id="fileDataOptional" />
+    <node id="fileData" />
+    <node id="Paths" />
+    <node id="Files" />
+    <node id="AcquerirServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\AcquerirServiceImpl.java</data>
+    </node>
+    <node id="acquerirDao" />
+    <node id="CandidatServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\CandidatServiceImpl.java</data>
+    </node>
+    <node id="candidatDao" />
+    <node id="CompetenceServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\CompetenceServiceImpl.java</data>
+    </node>
+    <node id="competenceDao" />
+    <node id="DateStageServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\DateStageServiceImpl.java</data>
+    </node>
+    <node id="dateStageDao" />
+    <node id="EntrepriseServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\EntrepriseServiceImpl.java</data>
+    </node>
+    <node id="entrepriseDao" />
+    <node id="EtudiantServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\EtudiantServiceImpl.java</data>
+    </node>
+    <node id="etudiantDao" />
+    <node id="ProfServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\ProfServiceImpl.java</data>
+    </node>
+    <node id="profDao" />
+    <node id="PromoServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\PromoServiceImpl.java</data>
+    </node>
+    <node id="promoDao" />
+    <node id="StageServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\StageServiceImpl.java</data>
+    </node>
+    <node id="stageDao" />
+    <node id="TuteurServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\TuteurServiceImpl.java</data>
+    </node>
+    <node id="tuteurDao" />
+    <node id="TypeStageServiceImpl">
+      <data key="d0">Service</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\TypeStageServiceImpl.java</data>
+    </node>
+    <node id="typeStageDao" />
+    <node id="ProjetSiApplicationTests">
+      <data key="d0">Class</data>
+      <data key="d1">projet_SI_gestion_ECM-main\src\test\java\com\example\projetSI\ProjetSiApplicationTests.java</data>
+    </node>
+    <edge source="ProjetSiApplication" target="SpringApplication">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CorsConfig" target="registry">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="AcquerirController" target="acquerirService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="candidatService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="storageService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="candidats">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="candidat">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="Collectors">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="dossier">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="ResponseEntity">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatController" target="e">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CompetenceController" target="competenceService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="DateStageController" target="dateStageService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="EntrepriseController" target="entrepriseService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="EtudiantController" target="etudiantService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="ProfController" target="profService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="PromoController" target="promoService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StageController" target="stageService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="TuteurController" target="tuteurService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="TypeStageController" target="typeStageService">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="fileDataDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="StringUtils">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="file">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="fileName">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="existingFileDataOptional">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="existingFileData">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="FileData">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="e">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="fileDataOptional">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="fileData">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="Paths">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StorageService" target="Files">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="AcquerirServiceImpl" target="acquerirDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="AcquerirServiceImpl" target="Acquerir">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CandidatServiceImpl" target="candidatDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="CompetenceServiceImpl" target="competenceDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="DateStageServiceImpl" target="dateStageDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="DateStageServiceImpl" target="DateStage">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="EntrepriseServiceImpl" target="entrepriseDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="EtudiantServiceImpl" target="etudiantDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="ProfServiceImpl" target="profDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="PromoServiceImpl" target="promoDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="StageServiceImpl" target="stageDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="TuteurServiceImpl" target="tuteurDao">
+      <data key="d2">call</data>
+    </edge>
+    <edge source="TypeStageServiceImpl" target="typeStageDao">
+      <data key="d2">call</data>
+    </edge>
+  </graph>
+</graphml>

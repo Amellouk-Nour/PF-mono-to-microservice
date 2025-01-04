@@ -107,48 +107,6 @@ class MonolithGraphPreparer:
         data = Data(x=self.node_features, edge_index=self.edge_index)
         return data
 
-    def visualize_dependency_graph(self):
-        """
-        Visualise uniquement le graphe des dépendances.
-        """
-        # Filtrer les arêtes de dépendance
-        dependency_edges = [
-            (u, v) for u, v, d in self.graph.edges(data=True) 
-            if d.get("relation") == "dependency"
-        ]
-
-        # Créer un sous-graphe pour les dépendances
-        dependency_graph = self.graph.edge_subgraph(dependency_edges).copy()
-
-        # Couleurs pour les nœuds
-        color_map = {
-            "Controller": "red",
-            "Service": "blue",
-            "Repository": "green",
-            "Component": "orange",
-            "Class": "gray",
-            "Unknown": "black"  # Ajouter une couleur pour les nœuds inconnus
-        }
-
-        node_colors = [
-            color_map.get(dependency_graph.nodes[node].get("type", "Unknown"), "gray") 
-            for node in dependency_graph.nodes
-        ]
-
-        plt.figure(figsize=(12, 12))
-
-        # Ajuster le layout pour espacer les nœuds
-        pos = nx.spring_layout(dependency_graph, seed=42, k=0.5, iterations=100)
-
-        # Dessiner les nœuds et arêtes
-        nx.draw_networkx_nodes(dependency_graph, pos, node_color=node_colors, node_size=500)
-        nx.draw_networkx_edges(dependency_graph, pos, alpha=0.5, edge_color="black")
-        nx.draw_networkx_labels(dependency_graph, pos, font_size=8)
-
-        plt.title("Graphe de Dépendance du Monolithe")
-        plt.axis("off")
-        plt.show()
-
     def visualize_graph(self):
         """
         Visualise le graphe en mettant en évidence les entités.
@@ -179,7 +137,7 @@ class MonolithGraphPreparer:
         nx.draw_networkx_edges(self.graph, pos, alpha=0.5, edge_color="black")
         nx.draw_networkx_labels(self.graph, pos, font_size=8)
 
-        plt.title("Graphe avec entités (@Entity) mises en évidence")
+        plt.title("Graphe")
         plt.axis("off")
         plt.show()
 
