@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
-  <key id="d3" for="edge" attr.name="type" attr.type="string" />
+  <key id="d6" for="edge" attr.name="is_config_dependency" attr.type="boolean" />
+  <key id="d5" for="edge" attr.name="type" attr.type="string" />
+  <key id="d4" for="node" attr.name="dependencies_count" attr.type="long" />
+  <key id="d3" for="node" attr.name="is_config" attr.type="boolean" />
   <key id="d2" for="node" attr.name="package" attr.type="string" />
   <key id="d1" for="node" attr.name="file" attr.type="string" />
   <key id="d0" for="node" attr.name="type" attr.type="string" />
@@ -9,518 +12,712 @@
       <data key="d0">Component</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\ProjetSiApplication.java</data>
       <data key="d2">com.example.projetSI</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="CorsConfig">
       <data key="d0">Configuration</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\configuration\CorsConfig.java</data>
       <data key="d2">com.example.projetSI.configuration</data>
+      <data key="d3">True</data>
+      <data key="d4">0</data>
     </node>
     <node id="AcquerirController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\AcquerirController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="CandidatController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\CandidatController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="CompetenceController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\CompetenceController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="DateStageController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\DateStageController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="EntrepriseController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\EntrepriseController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="EtudiantController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\EtudiantController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="ProfController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\ProfController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="PromoController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\PromoController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="StageController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\StageController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="TuteurController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\TuteurController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="TypeStageController">
       <data key="d0">Controller</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\controller\TypeStageController.java</data>
       <data key="d2">com.example.projetSI.controller</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Access">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Access.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Acquerir">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Acquerir.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Annee">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Annee.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Candidat">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Candidat.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Competence">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Competence.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="DateStage">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\DateStage.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="Entreprise">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Entreprise.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Etudiant">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Etudiant.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="FileData">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\FileData.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Professeur">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Professeur.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Promo">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Promo.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="Role">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Role.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Stage">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Stage.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="Tuteur">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Tuteur.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="TypeStage">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\TypeStage.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <node id="Utilisateur">
       <data key="d0">Entity</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\modal\Utilisateur.java</data>
       <data key="d2">com.example.projetSI.modal</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="AcquerirDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\AcquerirDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="CandidatDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\CandidatDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="CompetenceDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\CompetenceDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="DateStageDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\DateStageDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="EntrepriseDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\EntrepriseDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="EtudiantDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\EtudiantDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="FileDataDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\FileDataDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="ProfDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\ProfDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="PromoDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\PromoDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="StageDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\StageDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="TuteurDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\TuteurDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="TypeStageDao">
       <data key="d0">Repository</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\repository\TypeStageDao.java</data>
       <data key="d2">com.example.projetSI.repository</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="AcquerirService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\AcquerirService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="CandidatService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\CandidatService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="CompetenceService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\CompetenceService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="DateStageService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\DateStageService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="EntrepriseService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\EntrepriseService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="EtudiantService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\EtudiantService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="ProfService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\ProfService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="PromoService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\PromoService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="StageService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\StageService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="StorageService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\StorageService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">2</data>
     </node>
     <node id="TuteurService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\TuteurService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="TypeStageService">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\TypeStageService.java</data>
       <data key="d2">com.example.projetSI.service</data>
+      <data key="d3">False</data>
+      <data key="d4">1</data>
     </node>
     <node id="AcquerirServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\AcquerirServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="CandidatServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\CandidatServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="CompetenceServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\CompetenceServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="DateStageServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\DateStageServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="EntrepriseServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\EntrepriseServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="EtudiantServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\EtudiantServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="ProfServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\ProfServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="PromoServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\PromoServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="StageServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\StageServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="TuteurServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\TuteurServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="TypeStageServiceImpl">
       <data key="d0">Service</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\main\java\com\example\projetSI\service\implementation\TypeStageServiceImpl.java</data>
       <data key="d2">com.example.projetSI.service.implementation</data>
+      <data key="d3">False</data>
+      <data key="d4">3</data>
     </node>
     <node id="ProjetSiApplicationTests">
       <data key="d0">Component</data>
       <data key="d1">projet_SI_gestion_ECM-main\src\test\java\com\example\projetSI\ProjetSiApplicationTests.java</data>
       <data key="d2">com.example.projetSI</data>
+      <data key="d3">False</data>
+      <data key="d4">0</data>
     </node>
     <edge source="DateStage" target="Annee">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="Promo" target="Professeur">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="Stage" target="Professeur">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="Stage" target="Etudiant">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="Stage" target="Entreprise">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="Stage" target="Professeur">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="Utilisateur" target="Role">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="AcquerirDao" target="Acquerir">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="CandidatDao" target="Candidat">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="CompetenceDao" target="Competence">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="DateStageDao" target="DateStage">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="EntrepriseDao" target="Entreprise">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="EtudiantDao" target="Etudiant">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="FileDataDao" target="FileData">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="ProfDao" target="Professeur">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="PromoDao" target="Promo">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="StageDao" target="Stage">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TuteurDao" target="Tuteur">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TypeStageDao" target="TypeStage">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="AcquerirService" target="Acquerir">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="CandidatService" target="Candidat">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="CompetenceService" target="Competence">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="DateStageService" target="DateStage">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="EntrepriseService" target="Entreprise">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="EtudiantService" target="Etudiant">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="ProfService" target="Professeur">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="PromoService" target="Promo">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="StageService" target="Stage">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="StorageService" target="FileDataDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="StorageService" target="FileData">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="StorageService" target="FileDataDao">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TuteurService" target="Tuteur">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TypeStageService" target="TypeStage">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="AcquerirServiceImpl" target="AcquerirDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="AcquerirServiceImpl" target="AcquerirService">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="AcquerirServiceImpl" target="AcquerirDao">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="AcquerirServiceImpl" target="Acquerir">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="CandidatServiceImpl" target="CandidatService">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="CandidatServiceImpl" target="CandidatDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="CandidatServiceImpl" target="Candidat">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="CompetenceServiceImpl" target="Competence">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="CompetenceServiceImpl" target="CompetenceDao">
-      <data key="d3">dependency</data>
+    <edge source="CandidatServiceImpl" target="CandidatService">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="CompetenceServiceImpl" target="CompetenceService">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="DateStageServiceImpl" target="DateStage">
-      <data key="d3">dependency</data>
+    <edge source="CompetenceServiceImpl" target="CompetenceDao">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="DateStageServiceImpl" target="DateStageDao">
-      <data key="d3">dependency</data>
+    <edge source="CompetenceServiceImpl" target="Competence">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="DateStageServiceImpl" target="DateStageService">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="EntrepriseServiceImpl" target="EntrepriseDao">
-      <data key="d3">dependency</data>
+    <edge source="DateStageServiceImpl" target="DateStage">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="DateStageServiceImpl" target="DateStageDao">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="EntrepriseServiceImpl" target="Entreprise">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="EntrepriseServiceImpl" target="EntrepriseDao">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="EntrepriseServiceImpl" target="EntrepriseService">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="EtudiantServiceImpl" target="EtudiantService">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="EtudiantServiceImpl" target="Etudiant">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="EtudiantServiceImpl" target="EtudiantDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="ProfServiceImpl" target="Professeur">
-      <data key="d3">dependency</data>
+    <edge source="EtudiantServiceImpl" target="Etudiant">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="ProfServiceImpl" target="ProfService">
-      <data key="d3">dependency</data>
+    <edge source="EtudiantServiceImpl" target="EtudiantService">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="ProfServiceImpl" target="ProfDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="PromoServiceImpl" target="PromoService">
-      <data key="d3">dependency</data>
+    <edge source="ProfServiceImpl" target="Professeur">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
-    <edge source="PromoServiceImpl" target="Promo">
-      <data key="d3">dependency</data>
+    <edge source="ProfServiceImpl" target="ProfService">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="PromoServiceImpl" target="PromoDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="PromoServiceImpl" target="PromoService">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="PromoServiceImpl" target="Promo">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="StageServiceImpl" target="StageDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="StageServiceImpl" target="Stage">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="StageServiceImpl" target="StageService">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="TuteurServiceImpl" target="Tuteur">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TuteurServiceImpl" target="TuteurDao">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TuteurServiceImpl" target="TuteurService">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="TuteurServiceImpl" target="Tuteur">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TypeStageServiceImpl" target="TypeStageDao">
-      <data key="d3">dependency</data>
-    </edge>
-    <edge source="TypeStageServiceImpl" target="TypeStageService">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
     <edge source="TypeStageServiceImpl" target="TypeStage">
-      <data key="d3">dependency</data>
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
+    </edge>
+    <edge source="TypeStageServiceImpl" target="TypeStageService">
+      <data key="d5">dependency</data>
+      <data key="d6">False</data>
     </edge>
   </graph>
 </graphml>

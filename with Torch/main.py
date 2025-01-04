@@ -2,8 +2,10 @@ import torch
 import numpy as np
 import logging
 from pathlib import Path
-from MonolithDataPreparer import MonolithDataPreparer
-from MonolithGNN import MonolithGNN
+from EnhancedDataPreparer import EnhancedMonolithDataPreparer
+from DDDContextAnalyzer import DDDContextAnalyzer
+
+from MonolithGNN import AdaptiveMonolithGNN
 import torch.nn.functional as F
 from sklearn.metrics import silhouette_score, calinski_harabasz_score
 import matplotlib.pyplot as plt
@@ -36,8 +38,18 @@ def validate_project_path(source_dir):
     
     return True
 
-def setup_training(data_preparer, num_clusters, min_labeled_ratio=0.1):
-    """Prépare les données d'entraînement avec validation"""
+def setup_training(data_preparer, num_clusters, min_labeled_ratio=0.1, constraints=None):
+    """Prépare les données d'entraînement avec validation et contraintes
+    
+    Args:
+        data_preparer: Instance of EnhancedMonolithDataPreparer
+        num_clusters: Number of desired clusters
+        min_labeled_ratio: Minimum ratio of labeled data (default: 0.1)
+        constraints: Optional dictionary of clustering constraints
+        
+    Returns:
+        tuple: (prepared_data, mask)
+    """
     data = data_preparer.prepare_for_gnn()
     if data is None:
         raise ValueError("Échec de la préparation des données pour le GNN")
@@ -48,18 +60,26 @@ def setup_training(data_preparer, num_clusters, min_labeled_ratio=0.1):
         raise ValueError("Échec de la génération des labels")
         
     # Vérification de la distribution des labels
-    unique_labels, counts = np.unique(labels[labels != -1], return_counts=True)
+    unique_labels, counts = np.unique(labels[labels != -1].numpy(), return_counts=True)
     logger.info(f"Distribution des labels supervisés: {dict(zip(unique_labels, counts))}")
     
     # Vérification du ratio minimum de données étiquetées
-    labeled_ratio = (labels != -1).sum() / len(labels)
+    labeled_ratio = float((labels != -1).sum().item()) / len(labels)
     if labeled_ratio < min_labeled_ratio:
         logger.warning(f"Ratio de données étiquetées ({labeled_ratio:.2f}) inférieur au minimum recommandé ({min_labeled_ratio})")
+    
+    # Application des contraintes si fournies
+    if constraints is not None:
+        # Apply constraints logic here if needed
+        logger.info("Applying clustering constraints...")
+        # Example: You might modify the labels based on constraints
+        # labels = apply_constraints(labels, constraints)
     
     data.y = labels
     mask = labels != -1
     
     return data, mask
+
 
 def train_model(model, data, mask, num_epochs=1000, early_stopping_patience=20):
     """Entraîne le modèle avec early stopping"""
@@ -184,7 +204,7 @@ def save_results(model, data_preparer, predictions, output_dir):
 def main():
     # Configuration
     config = {
-        'source_dir': './projet_SI_gestion_ECM-main',  # Chemin vers votre projet Java
+        'source_dir': './projet_SI_gestion_ECM-main',
         'num_clusters': 3,
         'hidden_dim': 64,
         'num_epochs': 1000,
@@ -198,19 +218,38 @@ def main():
         validate_project_path(config['source_dir'])
         
         # Préparation des données
-        logger.info("Début de l'analyse du projet...")
-        data_preparer = MonolithDataPreparer(config['source_dir'])
+        data_preparer = EnhancedMonolithDataPreparer(config['source_dir'])
+        
+        # Ajout de l'analyse DDD
+        ddd_analyzer = DDDContextAnalyzer(config['source_dir'])
+        ddd_analyzer.analyze_domain_contexts()
+        
+        # Récupération des contraintes de base
+        base_constraints = data_preparer.analyze_clustering_constraints()
+        
+        # Enhancement avec les contraintes DDD
+        enhanced_constraints = ddd_analyzer.enhance_clustering_constraints(base_constraints)
+        
+        # Utilisation des contraintes enrichies pour le clustering
         if not data_preparer.parse_project():
             raise ValueError("Aucun composant n'a été détecté dans le projet")
-        
-        # Configuration du modèle et des données
-        data, mask = setup_training(data_preparer, config['num_clusters'])
+            
+        # Setup et training avec contraintes DDD - Fixed function call
+        data, mask = setup_training(
+            data_preparer, 
+            config['num_clusters'],
+            min_labeled_ratio=config['min_labeled_ratio'],
+            constraints=enhanced_constraints
+        )
         
         # Initialisation du modèle
-        model = MonolithGNN(
+        # Dans la fonction main()
+        model = AdaptiveMonolithGNN(
             input_dim=data.x.size(1),
             hidden_dim=64,
-            output_dim=config['num_clusters']
+            output_dim=config['num_clusters'],
+            graph_size=len(data_preparer.graph.nodes()),  # Ajoutez cette ligne
+            dropout=0.3
         )
         
         # Entraînement
