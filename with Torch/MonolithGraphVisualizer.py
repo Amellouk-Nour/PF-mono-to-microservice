@@ -41,6 +41,7 @@ class MonolithGraphPreparer:
         class_match = re.search(r"class\s+(\w+)", content)
         if class_match:
             class_name = class_match.group(1)
+            print(f"Classe détectée : {class_name}")
 
             # Identifier le type de classe en fonction des annotations
             if "@Controller" in content:
@@ -51,22 +52,28 @@ class MonolithGraphPreparer:
                 node_type = "Repository"
             elif "@Component" in content:
                 node_type = "Component"
+            elif "@Entity" in content:
+                node_type = "Entity"
             else:
                 node_type = "Class"
 
             # Ajouter le nœud au graphe
             self.graph.add_node(class_name, type=node_type, file=str(file_path))
+            print(f"Ajouté au graphe : {class_name} ({node_type})")
 
             # Extraire les dépendances (Autowired, Inject)
             dependencies = re.findall(r"@(Autowired|Inject)\s+.*\s+(\w+);", content)
             for _, dependency in dependencies:
                 self.graph.add_edge(class_name, dependency, relation="dependency")
+                print(f"Dépendance détectée : {class_name} -> {dependency}")
 
-            # Extraire les appels directs à d'autres classes
+            # Extraire les appels directs à d'autres classes ou entités
             method_calls = re.findall(r"(\w+)\.\w+\(", content)
             for callee in method_calls:
                 if callee != class_name:  # Éviter les auto-appels
+                    # Associer l'appel si la classe appelée existe ou est une entité
                     self.graph.add_edge(class_name, callee, relation="call")
+                    print(f"Appel direct détecté : {class_name} -> {callee}")
 
     def prepare_for_gnn(self):
         """
@@ -144,15 +151,16 @@ class MonolithGraphPreparer:
 
     def visualize_graph(self):
         """
-        Visualise le graphe avec des couleurs selon le type de nœud, avec des nœuds plus espacés.
+        Visualise le graphe en mettant en évidence les entités.
         """
         color_map = {
             "Controller": "red",
             "Service": "blue",
             "Repository": "green",
             "Component": "orange",
+            "Entity": "purple",  # Couleur pour les entités
             "Class": "gray",
-            "Unknown": "black"  # Ajouter une couleur pour les nœuds inconnus
+            "Unknown": "black"
         }
 
         # S'assurer que tous les nœuds ont un type, sinon assigner "Unknown"
@@ -166,16 +174,15 @@ class MonolithGraphPreparer:
         ]
 
         plt.figure(figsize=(12, 12))
-
-        # Ajuster le layout avec une valeur de `k` plus élevée pour espacer les nœuds
-        pos = nx.spring_layout(self.graph, seed=42, k=0.5, iterations=100)  # Augmenter `k` pour plus d'espacement
-
+        pos = nx.spring_layout(self.graph, seed=42, k=0.5, iterations=100)
         nx.draw_networkx_nodes(self.graph, pos, node_color=node_colors, node_size=500)
         nx.draw_networkx_edges(self.graph, pos, alpha=0.5, edge_color="black")
         nx.draw_networkx_labels(self.graph, pos, font_size=8)
-        plt.title("Graphe du Monolithe Spring Boot (avec nœuds espacés)")
+
+        plt.title("Graphe avec entités (@Entity) mises en évidence")
         plt.axis("off")
         plt.show()
+
 
 
 
