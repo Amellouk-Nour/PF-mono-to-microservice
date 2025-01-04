@@ -1,287 +1,264 @@
-# MonolithDataPreparer.py
 import networkx as nx
 import torch
 from torch_geometric.data import Data
 import numpy as np
 from pathlib import Path
 import re
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import RobustScaler
 import matplotlib.pyplot as plt
+import logging
 
 class MonolithDataPreparer:
     def __init__(self, source_dir):
         self.source_dir = Path(source_dir)
         self.graph = nx.DiGraph()
-        self.node_features = None
-        self.edge_index = None
-        self.node_mapping = {}
-        try:
-            # Tentative avec la nouvelle version de scikit-learn
-            self.feature_encoder = OneHotEncoder(sparse_output=False)
-        except TypeError:
-            # Fallback pour les anciennes versions
-            self.feature_encoder = OneHotEncoder(sparse=False)
-
-    def parse_project(self):
-        """
-        Analyse le projet pour construire un graphe à partir des classes et des relations.
-        """
-        for file_path in self.source_dir.rglob("*.java"):
-            self._process_file(file_path)
+        self.scaler = RobustScaler()
+        self.logger = logging.getLogger(__name__)
         
-        # Débogage : Lister les nœuds sans type
-        for node in self.graph.nodes:
-            if "type" not in self.graph.nodes[node]:
-                print(f"Nœud sans type : {node}")
-
+    def parse_project(self):
+        """Parse le projet Java et construit le graphe de dépendances"""
+        self.logger.info(f"Analyse du projet dans: {self.source_dir}")
+        java_files = list(self.source_dir.rglob("*.java"))
+        self.logger.info(f"Fichiers Java trouvés: {len(java_files)}")
+        
+        for file_path in java_files:
+            self._process_file(file_path)
+            
+        self.logger.info(f"Analyse terminée. {len(self.graph.nodes)} composants détectés")
+        return len(self.graph.nodes) > 0
+            
     def _process_file(self, file_path):
-        """
-        Analyse un fichier Java pour extraire les nœuds et les relations.
-        """
-        with file_path.open("r", encoding="utf-8") as f:
-            content = f.read()
-
-        # Extraire les classes
-        class_match = re.search(r"class\s+(\w+)", content)
-        if class_match:
+        """Traite un fichier Java individuel"""
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                
+            # Extraction du nom de la classe
+            class_pattern = r"(?:public\s+)?(?:class|interface|enum)\s+(\w+)"
+            class_match = re.search(class_pattern, content)
+            if not class_match:
+                return
+                
             class_name = class_match.group(1)
-            print(f"Classe détectée : {class_name}")
+            
+            # Package extraction
+            package_pattern = r"package\s+([\w.]+);"
+            package_match = re.search(package_pattern, content)
+            package = package_match.group(1) if package_match else "default"
+            
+            # Type detection with hierarchy
+            type_patterns = [
+                (r"@RestController|@Controller", "Controller"),
+                (r"@Service", "Service"),
+                (r"@Repository", "Repository"),
+                (r"@Entity", "Entity"),
+                (r"@Component", "Component"),
+                (r"@Configuration", "Configuration")
+            ]
+            
+            component_type = None
+            for pattern, type_name in type_patterns:
+                if re.search(pattern, content):
+                    component_type = type_name
+                    break
+                    
+            if not component_type:
+                # Fallback to naming conventions
+                if class_name.endswith("Controller"):
+                    component_type = "Controller"
+                elif class_name.endswith("Service"):
+                    component_type = "Service"
+                elif class_name.endswith("Repository"):
+                    component_type = "Repository"
+                elif class_name.endswith("Entity"):
+                    component_type = "Entity"
+                else:
+                    component_type = "Component"
+            
+            # Add node with metadata
+            self.graph.add_node(class_name, 
+                              type=component_type,
+                              file=str(file_path),
+                              package=package)
+                              
+            # Extract dependencies
+            self._extract_dependencies(content, class_name)
+            
+        except Exception as e:
+            self.logger.error(f"Erreur lors du traitement de {file_path}: {str(e)}")
+            
+    def _extract_dependencies(self, content, class_name):
+        """Extrait les dépendances du code"""
+        # Spring annotations
+        dependencies = set()
+        
+        # Autowired dependencies
+        autowired_pattern = r'@Autowired\s+(?:private\s+)?(\w+)\s+\w+'
+        dependencies.update(re.findall(autowired_pattern, content))
+        
+        # Constructor injection
+        constructor_pattern = r'public\s+\w+\(((?:[^)]+))\)'
+        constructor_matches = re.findall(constructor_pattern, content)
+        for params in constructor_matches:
+            param_types = re.findall(r'(\w+)\s+\w+(?:\s*,\s*|$)', params)
+            dependencies.update(param_types)
+            
+        # Import statements
+        import_pattern = r'import\s+[\w.]+\.(\w+);'
+        dependencies.update(re.findall(import_pattern, content))
+        
+        # Add edges
+        for dep in dependencies:
+            if dep != class_name and dep in self.graph:
+                self.graph.add_edge(class_name, dep, type="dependency")
 
-            # Identifier le type de classe en fonction des annotations
-            if "@Controller" in content:
-                node_type = "Controller"
-            elif "@Service" in content:
-                node_type = "Service"
-            elif "@Repository" in content:
-                node_type = "Repository"
-            elif "@Component" in content:
-                node_type = "Component"
-            elif "@Entity" in content:
-                node_type = "Entity"
-            else:
-                node_type = "Class"
-
-            # Ajouter le nœud au graphe
-            self.graph.add_node(class_name, type=node_type, file=str(file_path))
-            print(f"Ajouté au graphe : {class_name} ({node_type})")
-
-            # Extraire les dépendances (Autowired, Inject)
-            dependencies = re.findall(r"@(Autowired|Inject)\s+.*\s+(\w+);", content)
-            for _, dependency in dependencies:
-                self.graph.add_edge(class_name, dependency, relation="dependency")
-                print(f"Dépendance détectée : {class_name} -> {dependency}")
-
-            # Extraire les appels directs
-            method_calls = re.findall(r"(\w+)\.\w+\(", content)
-            for callee in method_calls:
-                if callee != class_name:
-                    self.graph.add_edge(class_name, callee, relation="call")
-                    print(f"Appel direct détecté : {class_name} -> {callee}")
-
-    def generate_labels(self, n_clusters=5):
-        """
-        Générer des labels semi-supervisés basés sur des règles métier.
-        Assure qu'au moins quelques nœuds sont étiquetés.
-        """
+    def generate_labels(self, n_clusters=3):
+        """Génère des labels semi-supervisés équilibrés"""
+        if len(self.graph.nodes) == 0:
+            return None
+            
         nodes = list(self.graph.nodes())
         n_nodes = len(nodes)
         labels = torch.full((n_nodes,), -1, dtype=torch.long)
         
-        labeled_count = 0
-        
-        # Première passe : étiqueter les composants clés
-        for idx, node in enumerate(nodes):
-            node_data = self.graph.nodes[node]
-            node_type = node_data.get('type', 'Unknown')
+        # Calculate node metrics
+        metrics = {}
+        for node in nodes:
+            # Basic metrics
+            in_deg = self.graph.in_degree(node)
+            out_deg = self.graph.out_degree(node)
             
-            # Règle 1: Regrouper les contrôleurs et leurs services associés
-            if node_type == 'Controller':
-                # Trouver les services associés
-                cluster = labeled_count % n_clusters
-                labels[idx] = cluster
-                labeled_count += 1
+            # Calculate coupling and cohesion
+            coupling = in_deg + out_deg
+            neighbors = list(self.graph.predecessors(node)) + list(self.graph.successors(node))
+            same_type_neighbors = sum(1 for n in neighbors 
+                                   if self.graph.nodes[n]['type'] == self.graph.nodes[node]['type'])
+            cohesion = same_type_neighbors / len(neighbors) if neighbors else 0
+            
+            # Package cohesion
+            same_package_neighbors = sum(1 for n in neighbors 
+                                      if self.graph.nodes[n]['package'] == self.graph.nodes[node]['package'])
+            package_cohesion = same_package_neighbors / len(neighbors) if neighbors else 0
+            
+            metrics[node] = {
+                'coupling': coupling,
+                'cohesion': cohesion,
+                'package_cohesion': package_cohesion,
+                'type': self.graph.nodes[node]['type'],
+                'package': self.graph.nodes[node]['package']
+            }
+        
+        # Select representative seeds
+        packages = set(nx.get_node_attributes(self.graph, 'package').values())
+        component_types = set(nx.get_node_attributes(self.graph, 'type').values())
+        
+        # Ensure balanced representation
+        seeds_per_cluster = max(2, n_nodes // (n_clusters * 5))  # At least 2 seeds per cluster
+        seeds = []
+        
+        # Select seeds based on coupling and cohesion
+        nodes_metrics = [(node, metrics[node]) for node in nodes]
+        nodes_metrics.sort(key=lambda x: (-x[1]['cohesion'], x[1]['coupling']))
+        
+        cluster_counts = {i: 0 for i in range(n_clusters)}
+        type_counts = {t: 0 for t in component_types}
+        
+        for node, node_metrics in nodes_metrics:
+            if len(seeds) >= n_clusters * seeds_per_cluster:
+                break
                 
-                # Étiqueter les services directement connectés
-                for neighbor in self.graph.neighbors(node):
-                    if self.graph.nodes[neighbor].get('type') == 'Service':
-                        neighbor_idx = nodes.index(neighbor)
-                        labels[neighbor_idx] = cluster
-                        labeled_count += 1
-
-            # Règle 2: Regrouper les entités et leurs repositories
-            elif node_type == 'Entity':
-                # Si pas déjà étiqueté
-                if labels[idx] == -1:
-                    cluster = labeled_count % n_clusters
-                    labels[idx] = cluster
-                    labeled_count += 1
-                    
-                    # Trouver le repository associé
-                    for neighbor in self.graph.neighbors(node):
-                        if self.graph.nodes[neighbor].get('type') == 'Repository':
-                            neighbor_idx = nodes.index(neighbor)
-                            labels[neighbor_idx] = cluster
-                            labeled_count += 1
-
-        # Si nous n'avons pas assez de nœuds étiquetés, ajouter des étiquettes supplémentaires
-        if labeled_count < n_nodes * 0.1:  # Au moins 10% des nœuds devraient être étiquetés
-            print("Ajout d'étiquettes supplémentaires pour assurer une supervision suffisante...")
-            unlabeled = [idx for idx, label in enumerate(labels) if label == -1]
-            additional_labels = min(len(unlabeled), n_nodes // 5)  # Étiqueter jusqu'à 20% supplémentaires
+            # Find best cluster for this node
+            best_cluster = min(cluster_counts.items(), key=lambda x: x[1])[0]
             
-            for idx in unlabeled[:additional_labels]:
-                labels[idx] = labeled_count % n_clusters
-                labeled_count += 1
-
-        print(f"Nombre total de nœuds étiquetés : {labeled_count}")
-        print(f"Distribution des labels : {torch.bincount(labels[labels != -1])}")
+            if type_counts[node_metrics['type']] < (len(seeds) // len(component_types) + 1):
+                seeds.append((node, best_cluster))
+                cluster_counts[best_cluster] += 1
+                type_counts[node_metrics['type']] += 1
         
-        if labeled_count == 0:
-            print("ATTENTION : Aucun nœud n'a été étiqueté. Vérification du graphe :")
-            print(f"Nombre total de nœuds : {len(nodes)}")
-            for node in nodes:
-                print(f"Nœud : {node}, Type : {self.graph.nodes[node].get('type', 'Unknown')}")
-        
+        # Assign initial labels
+        for node, cluster in seeds:
+            idx = nodes.index(node)
+            labels[idx] = cluster
+            
         return labels
 
     def prepare_for_gnn(self):
-        """
-        Prépare les données pour un modèle GNN avec des caractéristiques enrichies.
-        Ajoute une vérification des types de nœuds.
-        """
-        # Créer un mapping entre les classes et des indices
+        """Prépare les données pour le GNN"""
+        if len(self.graph.nodes) == 0:
+            return None
+            
+        # Prepare features
         nodes = list(self.graph.nodes())
-        self.node_mapping = {node: i for i, node in enumerate(nodes)}
-
-        # Afficher les statistiques des types de nœuds
-        node_type_stats = {}
-        for node in self.graph.nodes():
-            node_type = self.graph.nodes[node].get('type', 'Unknown')
-            node_type_stats[node_type] = node_type_stats.get(node_type, 0) + 1
+        features = []
         
-        print("\nStatistiques des types de nœuds:")
-        for node_type, count in node_type_stats.items():
-            print(f"{node_type}: {count}")
-
-        # Construire edge_index pour le GNN
-        edges = list(self.graph.edges())
-        self.edge_index = torch.tensor(
-            [[self.node_mapping[src], self.node_mapping[dst]] for src, dst in edges],
-            dtype=torch.long
-        ).t()
-
-        # Préparer les caractéristiques des nœuds
-        node_types = []
-        node_features_list = []
+        # Get unique values for one-hot encoding
+        types = list(set(nx.get_node_attributes(self.graph, 'type').values()))
+        packages = list(set(nx.get_node_attributes(self.graph, 'package').values()))
         
         for node in nodes:
-            # Type de base du nœud
-            node_type = self.graph.nodes[node].get('type', 'Unknown')
-            node_types.append(node_type)
+            # Basic metrics
+            in_deg = self.graph.in_degree(node)
+            out_deg = self.graph.out_degree(node)
             
-            # Caractéristiques structurelles
-            degree = self.graph.degree(node)
-            in_degree = self.graph.in_degree(node)
-            out_degree = self.graph.out_degree(node)
-            clustering_coeff = nx.clustering(self.graph, node)
+            # Type one-hot encoding
+            type_idx = types.index(self.graph.nodes[node]['type'])
+            type_onehot = [0] * len(types)
+            type_onehot[type_idx] = 1
             
-            # Caractéristiques spécifiques aux microservices
-            is_entry_point = 1.0 if node_type == "Controller" else 0.0
-            is_data_layer = 1.0 if node_type in ["Repository", "Entity"] else 0.0
-            is_service = 1.0 if node_type == "Service" else 0.0
+            # Package one-hot encoding
+            package_idx = packages.index(self.graph.nodes[node]['package'])
+            package_onehot = [0] * len(packages)
+            package_onehot[package_idx] = 1
             
-            # Caractéristiques de connectivité
+            # Structural metrics
             neighbors = list(self.graph.neighbors(node))
-            has_controller = 1.0 if any(self.graph.nodes[n].get('type') == 'Controller' for n in neighbors) else 0.0
-            has_service = 1.0 if any(self.graph.nodes[n].get('type') == 'Service' for n in neighbors) else 0.0
-            has_repository = 1.0 if any(self.graph.nodes[n].get('type') == 'Repository' for n in neighbors) else 0.0
+            clustering_coef = nx.clustering(self.graph, node)
             
-            # Combiner toutes les caractéristiques
-            node_features = [
-                degree,
-                in_degree,
-                out_degree,
-                clustering_coeff,
-                is_entry_point,
-                is_data_layer,
-                is_service,
-                has_controller,
-                has_service,
-                has_repository
-            ]
-            node_features_list.append(node_features)
-
-        # Encoder les types de nœuds avec OneHotEncoder
-        node_types = np.array(node_types).reshape(-1, 1)
-        self.feature_encoder.fit(node_types)
-        type_encoded = self.feature_encoder.transform(node_types)
+            feature_vector = [
+                in_deg / self.graph.number_of_nodes(),
+                out_deg / self.graph.number_of_nodes(),
+                clustering_coef
+            ] + type_onehot + package_onehot
+            
+            features.append(feature_vector)
+            
+        x = torch.tensor(features, dtype=torch.float)
         
-        # Normaliser les caractéristiques structurelles
-        node_features_array = np.array(node_features_list)
-        if node_features_array.size > 0:  # Vérifier qu'il y a des features
-            # Normaliser chaque colonne séparément
-            node_features_mean = np.mean(node_features_array, axis=0)
-            node_features_std = np.std(node_features_array, axis=0)
-            node_features_std[node_features_std == 0] = 1  # Éviter la division par zéro
-            node_features_normalized = (node_features_array - node_features_mean) / node_features_std
-        else:
-            node_features_normalized = node_features_array
-
-        # Combiner les caractéristiques encodées avec les caractéristiques normalisées
-        self.node_features = torch.tensor(
-            np.hstack([type_encoded, node_features_normalized]),
-            dtype=torch.float
-        )
-
-        print("\nStatistiques des données préparées:")
-        print(f"Nombre de nœuds: {len(nodes)}")
-        print(f"Nombre d'arêtes: {len(edges)}")
-        print(f"Dimensions des features: {self.node_features.shape}")
-        print(f"Dimensions de edge_index: {self.edge_index.shape}")
-
-        # Créer l'objet Data de PyTorch Geometric
-        data = Data(x=self.node_features, edge_index=self.edge_index)
+        # Create edge_index
+        edge_index = []
+        for edge in self.graph.edges():
+            src_idx = nodes.index(edge[0])
+            dst_idx = nodes.index(edge[1])
+            edge_index.append([src_idx, dst_idx])
+            
+        edge_index = torch.tensor(edge_index).t().contiguous()
         
-        # Vérifier la validité des données
-        if data.validate():
-            print("Les données sont valides pour PyTorch Geometric")
-        else:
-            print("ATTENTION: Les données pourraient avoir des problèmes de format")
+        return Data(x=x, edge_index=edge_index)
 
-        return data
-
-    def visualize_clusters(self, graph, labels):
-        """
-        Visualise les clusters proposés.
-        """
+    def visualize_clusters(self, predictions):
+        """Visualise les clusters proposés"""
         plt.figure(figsize=(15, 15))
-        pos = nx.spring_layout(graph, k=1, iterations=50)
+        pos = nx.spring_layout(self.graph, k=1.5, iterations=50)
         
-        # Créer une palette de couleurs pour les clusters
-        unique_labels = set(labels)
-        colors = plt.cm.rainbow(np.linspace(0, 1, len(unique_labels)))
-        color_map = dict(zip(unique_labels, colors))
+        # Color mapping
+        unique_clusters = len(set(predictions))
+        colors = plt.cm.rainbow(np.linspace(0, 1, unique_clusters))
+        color_map = dict(zip(range(unique_clusters), colors))
         
-        # Dessiner les nœuds avec leurs couleurs de cluster
-        for label in unique_labels:
-            node_list = [node for i, node in enumerate(graph.nodes()) if labels[i] == label]
-            nx.draw_networkx_nodes(graph, pos, 
+        # Draw nodes by cluster
+        nodes = list(self.graph.nodes())
+        for cluster_id in range(unique_clusters):
+            node_list = [nodes[i] for i, pred in enumerate(predictions) if pred == cluster_id]
+            nx.draw_networkx_nodes(self.graph, pos,
                                  nodelist=node_list,
-                                 node_color=[color_map[label]],
+                                 node_color=[color_map[cluster_id]],
                                  node_size=500)
         
-        # Dessiner les arêtes
-        nx.draw_networkx_edges(graph, pos, alpha=0.2)
+        # Draw edges and labels
+        nx.draw_networkx_edges(self.graph, pos, alpha=0.2)
+        nx.draw_networkx_labels(self.graph, pos)
         
-        # Ajouter les labels
-        nx.draw_networkx_labels(graph, pos, font_size=8)
-        
-        plt.title("Clusters de Microservices Proposés")
+        plt.title("Proposed Microservices Clusters")
         plt.axis("off")
-        plt.show()
-
-    def export_graph(self, output_path):
-        """
-        Exporte le graphe au format GraphML pour analyse ultérieure.
-        """
-        nx.write_graphml(self.graph, output_path)
+        plt.savefig("clusters.png")
+        plt.close()
